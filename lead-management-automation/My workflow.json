@@ -1,0 +1,587 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Contact Us",
+        "formDescription": "Get a Quote now",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name",
+              "placeholder": "John Doe"
+            },
+            {
+              "fieldLabel": "email",
+              "fieldType": "email",
+              "placeholder": "example@gmail.com"
+            },
+            {
+              "fieldLabel": "Services",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "SEO"
+                  },
+                  {
+                    "option": "ADS"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Budget",
+              "fieldType": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        -80
+      ],
+      "id": "7af298d1-0b56-4906-8c80-441eb960beee",
+      "name": "On form submission",
+      "webhookId": "65575140-254d-4d4a-9166-145ffebd83c6"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1ynviuwmIFLO8nQvj7imuBWmiNCBoeC2G-Q9xh_sv-cM",
+          "mode": "list",
+          "cachedResultName": "n8n_lead_sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ynviuwmIFLO8nQvj7imuBWmiNCBoeC2G-Q9xh_sv-cM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ynviuwmIFLO8nQvj7imuBWmiNCBoeC2G-Q9xh_sv-cM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Full Name": "={{ $json['Full Name'] }}",
+            "Email": "={{ $json.email }}",
+            "Budget": "={{ $json.Budget }}",
+            "Services": "={{ $json.Services }}",
+            "Contacted": "=.",
+            "Date": "={{$today}}",
+            "Rejected": "."
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Services",
+              "displayName": "Services",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contacted",
+              "displayName": "Contacted",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rejected",
+              "displayName": "Rejected",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        -80
+      ],
+      "id": "ae887342-921c-4674-bccf-8bc36fd49ddf",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Fu01Xiv8bRVoAbFk",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a3bb3ab0-e2ff-4b68-9050-8682a10ace24",
+              "leftValue": "={{ $json.Budget }}",
+              "rightValue": 1500,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        -80
+      ],
+      "id": "5f598760-f935-4b4a-8719-92ca2e10e0e7",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd9b30d4-988f-486a-83fd-b045c07f7466",
+              "name": "test",
+              "value": "test",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        -80
+      ],
+      "id": "60e62a34-2f93-409a-a9f9-0b30f7886e80",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "sendTo": "visuyal10@gmail.com",
+        "subject": "New Lead  🔔 ",
+        "emailType": "text",
+        "message": "=🔔 New Lead \nName : {{ $('Filter').item.json['Full Name'] }}\nEmail:{{ $('Filter').item.json.Email }}\nService:{{ $('Filter').item.json.Services }}\nBudget:{{ $('Filter').item.json.Budget }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        -80
+      ],
+      "id": "d6259f83-d398-4992-af63-e8b889384d13",
+      "name": "Send a message",
+      "webhookId": "3563b596-ecf8-4f46-b07d-23bcca061424",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6f4296eb-3eb0-450f-bf0d-47998aaa104f",
+              "leftValue": "={{ $('On form submission').item.json.Services }}",
+              "rightValue": "SEO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1120,
+        -80
+      ],
+      "id": "f3d9d9c2-6f5b-40f9-958b-ae0d7c7866a9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.email }}",
+        "subject": "Thanks for enquiring with canonball media",
+        "message": "=hey {{ $('On form submission').item.json['Full Name'].split(' ')[0] }} thanks for enquiring about SEO Services . I'd be happy to help\n{{ $today }}\n.......... \nHere's a link to call\ncalendly.com/appointment",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        -176
+      ],
+      "id": "57fa0c3d-cc2b-4dca-8bea-c6675e26a34a",
+      "name": "Send a message1",
+      "webhookId": "f638cb85-fd5b-4135-a5fc-37919ba1a6a1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.email }}",
+        "subject": "Thanks for enquiring with canonball media",
+        "message": "=hey {{ $('On form submission').item.json['Full Name'].split(' ')[0] }} thanks for enquiring about ADS Services . I'd be happy to help\n{{ $today }}\n.......... \nHere's a link to call\ncalendly.com/appointment",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        16
+      ],
+      "id": "221863e9-da57-414f-b14a-5fccb1dee695",
+      "name": "Send a message2",
+      "webhookId": "f638cb85-fd5b-4135-a5fc-37919ba1a6a1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1568,
+        -80
+      ],
+      "id": "38f4faae-3206-4280-a546-c4edcb3261e4",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1ynviuwmIFLO8nQvj7imuBWmiNCBoeC2G-Q9xh_sv-cM",
+          "mode": "list",
+          "cachedResultName": "n8n_lead_sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ynviuwmIFLO8nQvj7imuBWmiNCBoeC2G-Q9xh_sv-cM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ynviuwmIFLO8nQvj7imuBWmiNCBoeC2G-Q9xh_sv-cM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $('On form submission').item.json.email }}",
+            "Contacted": "TRUE",
+            "Rejected": "={{ $if($('On form submission').item.json.Budget>=1000,false,true) }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Services",
+              "displayName": "Services",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget",
+              "displayName": "Budget",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contacted",
+              "displayName": "Contacted",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rejected",
+              "displayName": "Rejected",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1792,
+        -80
+      ],
+      "id": "621d6aef-ac34-46bc-93a4-d7efe300cae2",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Fu01Xiv8bRVoAbFk",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "fdbd65f8-48b5-4fed-9fc8-f9db5de89602",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d0bcd0fb94d657b62ce8db3a305d55b8c1aaf664237172cc2928bb3a92af5190"
+  },
+  "id": "HYZvQ00bhIY3GBa9",
+  "tags": []
+}
