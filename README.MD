@@ -1,76 +1,88 @@
-# 🚀 Lead Management Automation using n8n
+# n8n Workflow Automation Projects
 
-An automated lead management workflow built using n8n that captures leads, stores them in Google Sheets, qualifies them based on budget, sends notifications, and automatically follows up with prospects.
+A collection of practical n8n automation workflows for email management, lead capture, CRM updates, and AI-assisted productivity.
 
-## 📌 Features
+## Projects
 
-- Contact Form Submission
-- Google Sheets Integration
-- Lead Qualification based on Budget
-- Email Notifications
-- Personalized Follow-up Emails
-- CRM Status Tracking
-- Automated Lead Processing
+### AI Email Classifier & Response Assistant
 
-## 🔄 Workflow Overview
+An AI-powered Gmail automation workflow that classifies incoming emails with Google Gemini, applies the correct Gmail labels, archives selected messages, and creates draft replies for personal emails.
 
-1. User submits the contact form
-2. Lead details are saved to Google Sheets
-3. Lead budget is evaluated
-4. Qualified leads trigger notification emails
-5. Service-specific follow-up emails are sent
-6. Lead status is updated in Google Sheets
+**Folder:** [ai-email-classifier-assistant](ai-email-classifier-assistant/)
 
-## 🛠️ Tech Stack
+**Highlights:**
 
-- n8n
-- Google Sheets
-- Gmail API
-- Webhooks
-- Conditional Logic
+- Gmail email classification using Gemini 2.5 Pro
+- Categories for jobs, work, personal, finance, support, travel, updates, social, and promotions
+- Automatic Gmail label assignment
+- Inbox cleanup by marking messages as read and removing the Inbox label
+- AI-generated Gmail drafts for personal email replies using Gemini 2.5 Flash
 
-## 📷 Screenshots
+**Workflow file:** `ai-email-classifier-assistant/My workflow 2.json`
 
-### Workflow
-![](lead-management-automation/screenshots/workflow.png)
+### Lead Management Automation
 
-### Contact Form
-![](lead-management-automation/screenshots/form.png)
+A lead management workflow that captures form submissions, stores leads in Google Sheets, qualifies them by budget, notifies the business owner, sends service-specific follow-up emails, and updates CRM-style lead status.
 
-### Lead Database
-![](lead-management-automation/screenshots/sheets.png)
+**Folder:** [lead-management-automation](lead-management-automation/)
 
-## 📂 Project Structure
+**Highlights:**
+
+- n8n form trigger for lead capture
+- Google Sheets lead database
+- Budget-based lead qualification
+- Internal Gmail notification for qualified leads
+- Personalized follow-up emails for SEO and ADS inquiries
+- Contacted and rejected status updates in Google Sheets
+
+**Workflow file:** `lead-management-automation/My workflow.json`
+
+## Repository Structure
 
 ```text
-lead-management-automation/
-│
-├── README.md
-├── workflow.json
-└── screenshots/
-    ├── workflow.png
-    ├── form.png
-    └── sheets.png
+n8n-workflows/
+├── README.MD
+├── ai-email-classifier-assistant/
+│   ├── My workflow 2.json
+│   ├── README.MD
+│   └── screenshots/
+│       ├── draft.png
+│       ├── gmail-labels.png
+│       └── workflow.png
+└── lead-management-automation/
+    ├── My workflow.json
+    ├── README.MD
+    └── screenshots/
+        ├── form.png
+        ├── sheets.png
+        └── workflow.png
 ```
 
-## 🚀 Import Workflow
+## Requirements
 
-1. Download `workflow.json`
-2. Import into n8n
-3. Configure Google Sheets credentials
-4. Configure Gmail credentials
-5. Activate the workflow
+- n8n
+- Gmail OAuth2 credentials
+- Google account access
+- Google Sheets credentials for the lead workflow
+- Google Gemini credentials for the AI email workflow
 
-## 🎯 Use Cases
+## How To Use
 
-- Marketing Agencies
-- Freelancers
-- Lead Generation Teams
-- Service-Based Businesses
-- Digital Agencies
+1. Open the folder for the workflow you want to use.
+2. Read the project-specific `README.MD`.
+3. Import the workflow JSON file into n8n.
+4. Configure credentials and account-specific IDs.
+5. Test the workflow with sample data.
+6. Activate the workflow when everything looks correct.
 
-## 👨‍💻 Author
+## Notes
+
+- Workflow credentials are not included and must be configured in your own n8n instance.
+- Gmail labels, Google Sheet IDs, email recipients, and model credentials are account-specific.
+- Review all email templates, AI prompts, and automation rules before activating.
+
+## Author
 
 Vivek Suyal
 
-If you found this project useful, consider giving it a ⭐.
+If you found these workflows useful, consider giving the repository a star.
