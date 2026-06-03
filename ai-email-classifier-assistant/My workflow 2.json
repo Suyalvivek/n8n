@@ -1,0 +1,760 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "simple": false,
+        "maxResults": 2,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "488702f9-29c0-44ec-87f1-14124a4216f2",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Promotions",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "22389d7f-a404-4e5d-afa3-bcfc2862cd59"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "77fddc54-07d7-427e-ab19-4eddedf5b9f7",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Social",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f5551596-602d-4ada-aea3-9c440da33620",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Personal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b046e052-a3f1-4736-ad72-719331b64ded",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Work",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fd025209-556d-401d-8bbe-f3f4ca867a9c",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Finance",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3cdda7d3-d2f1-4164-8a1e-444a465ea2f8",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Support",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e99069f5-040a-4f91-92c7-8657643b3104",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Travel",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3f4e5deb-31ff-417d-ba1e-36bdf56a1008",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Updates",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "026a4dd3-8ab4-4ed6-ba9e-e24cf0e75537",
+                    "leftValue": "={{ $json.content.parts[0].text }}",
+                    "rightValue": "Jobs & Internships",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "a33f317f-516f-4dea-ae3d-bf20fdd20d69",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "CATEGORY_PROMOTIONS"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        -432
+      ],
+      "id": "928bfe84-2d2d-421d-a88d-aa88f831df18",
+      "name": "Promotions",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_842701425592791231"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        -64
+      ],
+      "id": "146734d3-e800-4bb8-8997-d023cce5cab5",
+      "name": "Personal",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "CATEGORY_SOCIAL"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        -240
+      ],
+      "id": "7d1db969-d742-4a23-a4f4-c35f95293025",
+      "name": "Social",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_6901274910051539396"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        128
+      ],
+      "id": "33230723-2fec-44cb-a7c7-0c274cfc5dd7",
+      "name": "Work",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_7545813185229701224"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        304
+      ],
+      "id": "5bd242b5-2517-4b43-ab96-d47fae023d9c",
+      "name": "Finance",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_5430065469605785936"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        480
+      ],
+      "id": "fe4c03ec-e5a7-4d3c-b733-b004a2f870e5",
+      "name": "Support",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_673271675722009518"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1008,
+        656
+      ],
+      "id": "b5ee9f20-d6b2-4f03-a460-e56ba8acc80e",
+      "name": "Travel",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_522699298670751337"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1008,
+        848
+      ],
+      "id": "8d9a1300-7ee4-4de9-8bed-b26f40cb13a1",
+      "name": "Job&Internship",
+      "webhookId": "2f166c40-caa2-425d-8e6c-14be2758dc01",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1504,
+        768
+      ],
+      "id": "d9d66e62-b2cd-4c6d-99f8-e18b33206a5f",
+      "name": "Mark a message as read1",
+      "webhookId": "047ef66e-2733-40ff-8d84-b031db2bc618",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "removeLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "INBOX"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1712,
+        768
+      ],
+      "id": "9cc85d42-8a51-4b60-a39b-971788210808",
+      "name": "Remove label from message",
+      "webhookId": "1cc64f30-ab5c-42b4-b4ac-c4984a4697b5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Sender:{{ $('Gmail Trigger').item.json.to.value[0].address }}\nSubject:{{ $('Gmail Trigger').item.json.subject }}\nEmail Body:{{ $('Gmail Trigger').item.json.text }}"
+            },
+            {
+              "content": "You are an expert at replying emails to incoming emails.\nplease create a polished response.\nFollow the below mentioned Rules.\nRules\n1.Please do not include custom variables like [Name].\n2.Please sign off on all emails with \"Best Vivek\"",
+              "role": "model"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        1424,
+        16
+      ],
+      "id": "cc47fd34-6401-44f9-8872-1155ce81376c",
+      "name": "Message a model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YfYJOgFN9JfQ2o9j",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "=RE: {{ $('Gmail Trigger').item.json.subject }}",
+        "message": "={{ $json.content.parts[0].text }}",
+        "options": {
+          "threadId": "={{ $('Gmail Trigger').item.json.threadId }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1776,
+        16
+      ],
+      "id": "0584c545-26e7-4e92-95f4-45d4b13b3d5b",
+      "name": "Create a draft",
+      "webhookId": "3b81746a-3470-4e7e-95d3-5e3d501cee07",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "BdAtPoF8LNyapdup",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an Email Classification Assistant.\n\nYour task is to analyze incoming emails and classify them into exactly ONE category.\n\nCategories:\n\n1. Promotions\n- Marketing emails\n- Discounts, coupons, offers\n- Product announcements\n- Newsletters\n- Sales campaigns\n- Affiliate promotions\n\nExamples:\n- \"50% Off This Weekend\"\n- \"New Product Launch\"\n- \"Exclusive Offer For You\"\n\n2. Social\n- Notifications from social networks\n- Mentions, likes, comments, follows\n- Community updates\n- Group activity notifications\n\nExamples:\n- \"Someone commented on your post\"\n- \"You have 5 new followers\"\n- \"Your LinkedIn profile appeared in 10 searches\"\n\n3. Personal\n- Human-to-human communication\n- Emails requiring attention or response\n- Conversations\n- Invitations\n- Personal requests\n\nExamples:\n- \"Can we schedule a meeting?\"\n- \"Checking in regarding our discussion\"\n- \"Happy Birthday!\"\n\n4. Work\n- Business communication\n- Project updates\n- Team discussions\n- Client emails\n- Interview invitations\n- Task assignments\n\nExamples:\n- \"Sprint Planning Meeting\"\n- \"Client Feedback\"\n- \"Interview Round Scheduled\"\n\n5. Finance\n- Banking alerts\n- Payment confirmations\n- Invoices\n- Subscription receipts\n- Tax-related emails\n\nExamples:\n- \"Payment Successful\"\n- \"Invoice Attached\"\n- \"Credit Card Statement\"\n\n6. Support\n- Customer support tickets\n- Issue reports\n- Service requests\n- Bug reports\n\nExamples:\n- \"Your support ticket has been updated\"\n- \"Issue resolved\"\n- \"Case #12345\"\n\n7. Travel\n- Flight bookings\n- Hotel reservations\n- Travel itineraries\n- Check-in notifications\n\nExamples:\n- \"Flight Confirmation\"\n- \"Boarding Pass\"\n- \"Hotel Booking Details\"\n\n8. Updates\n- Account notifications\n- Security alerts\n- Password resets\n- Service updates\n- Policy changes\n\nExamples:\n- \"Password Changed\"\n- \"Privacy Policy Updated\"\n- \"Security Alert\"\n\n9. Jobs & Internships\n- Job opportunities\n- Internship opportunities\n- Recruitment emails\n- Interview invitations\n- Assessment links\n- Application status updates\n- Offer letters\n- Rejection emails\n- Hiring communications\n\nExamples:\n- \"Your interview has been scheduled\"\n- \"Complete this coding assessment\"\n- \"Application Status Update\"\n- \"Summer Internship Opportunity\"\n- \"Congratulations! Offer Letter Attached\"\n- \"We reviewed your application\"\n\nOutput Category: Jobs & Internships\n\nPriority Rules:\n\n1. If the email concerns hiring, recruitment, interviews,\n   internships, assessments, application status, offer letters,\n   or career opportunities → Jobs & Internships.\n\n2. If the email is from a company recruiter discussing a role,\n   even if it is business-related → Jobs & Internships.\n\n3. Marketing emails advertising courses or job boards remain\n   Promotions unless they are directly related to an active\n   application process.\nOnly take 2 emails at a time\n\n- Jobs & Internships\n- Work\n- Personal\n- Finance\n- Travel\n- Support\n- Updates\n- Social\n- Promotions",
+              "role": "model"
+            },
+            {
+              "content": "=Sender:{{ $json.from.value[0].name }}\nSubject:{{ $json.subject }}\nEmail body:{{ $json.html }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "908b355f-a44d-4c4d-8fa5-55d2b4152653",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YfYJOgFN9JfQ2o9j",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Promotions",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Social",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Personal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Work",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finance",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Support",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [
+          {
+            "node": "Travel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Job&Internship",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Social": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Job&Internship": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark a message as read1": {
+      "main": [
+        [
+          {
+            "node": "Remove label from message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Promotions": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Travel": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personal": {
+      "main": [
+        [
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "Create a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6779b678-d2ab-42e8-ba8d-1a7cf480a2ae",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d0bcd0fb94d657b62ce8db3a305d55b8c1aaf664237172cc2928bb3a92af5190"
+  },
+  "id": "nbOZrNBf5sNPCbHI",
+  "tags": []
+}
