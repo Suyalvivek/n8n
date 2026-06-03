@@ -1,6 +1,6 @@
 # n8n Workflow Automation Projects
 
-A collection of practical n8n automation workflows for email management, lead capture, CRM updates, and AI-assisted productivity.
+A collection of practical n8n automation workflows for email management, lead capture, CRM updates, job market research, and AI-assisted productivity.
 
 ## Projects
 
@@ -37,6 +37,22 @@ A lead management workflow that captures form submissions, stores leads in Googl
 
 **Workflow file:** `lead-management-automation/My workflow.json`
 
+### Job Market Automation
+
+An n8n workflow that uses Apify scrapers to collect Google Maps company data and Indeed job listings, stores the results in Google Sheets, and includes a Gmail digest branch for qualified leads.
+
+**Folder:** [job-market-automation](job-market-automation/)
+
+**Highlights:**
+
+- Scheduled Apify scraping for Google Maps businesses
+- Scheduled Apify scraping for Indeed job listings
+- Google Sheets append-or-update storage for companies and jobs
+- Dedupe matching by website and company URL
+- Lead filtering, sorting, and Gmail summary generation
+
+**Workflow file:** `job-market-automation/My workflow 3.json`
+
 ## Repository Structure
 
 ```text
@@ -48,6 +64,12 @@ n8n-workflows/
 │   └── screenshots/
 │       ├── draft.png
 │       ├── gmail-labels.png
+│       └── workflow.png
+├── job-market-automation/
+│   ├── My workflow 3.json
+│   ├── README.MD
+│   └── screenshots/
+│       ├── jobs-sheet.png
 │       └── workflow.png
 └── lead-management-automation/
     ├── My workflow.json
@@ -64,6 +86,7 @@ n8n-workflows/
 - Gmail OAuth2 credentials
 - Google account access
 - Google Sheets credentials for the lead workflow
+- Apify credentials for the job market workflow
 - Google Gemini credentials for the AI email workflow
 
 ## How To Use
@@ -78,8 +101,8 @@ n8n-workflows/
 ## Notes
 
 - Workflow credentials are not included and must be configured in your own n8n instance.
-- Gmail labels, Google Sheet IDs, email recipients, and model credentials are account-specific.
-- Review all email templates, AI prompts, and automation rules before activating.
+- Gmail labels, Google Sheet IDs, email recipients, Apify actor settings, and model credentials are account-specific.
+- Review all email templates, AI prompts, scraper inputs, and automation rules before activating.
 
 ## Author
 
