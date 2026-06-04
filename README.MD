@@ -1,6 +1,6 @@
 # n8n Workflow Automation Projects
 
-A collection of practical n8n automation workflows for email management, lead capture, CRM updates, job market research, and AI-assisted productivity.
+A collection of practical n8n automation workflows for email management, lead capture, client onboarding, CRM updates, job market research, and AI-assisted productivity.
 
 ## Projects
 
@@ -53,6 +53,22 @@ An n8n workflow that uses Apify scrapers to collect Google Maps company data and
 
 **Workflow file:** `job-market-automation/My workflow 3.json`
 
+### Client Onboarding Automation
+
+A webhook-based client onboarding workflow that listens for Google Sheets updates, routes edited columns and stage values, and sends Gmail messages for meeting links, onboarding forms, and new-lead welcomes.
+
+**Folder:** [client-onboarding-automation](client-onboarding-automation/)
+
+**Highlights:**
+
+- POST webhook trigger for Google Sheets update events
+- Column-based routing for onboarding actions
+- Meeting-link email when a tracked value is marked `TRUE`
+- Stage-based routing for `OnBoarding` and `New Lead`
+- Gmail follow-up messages personalized with sheet row data
+
+**Workflow file:** `client-onboarding-automation/webhook.json`
+
 ## Repository Structure
 
 ```text
@@ -71,11 +87,17 @@ n8n-workflows/
 │   └── screenshots/
 │       ├── jobs-sheet.png
 │       └── workflow.png
-└── lead-management-automation/
-    ├── My workflow.json
+├── lead-management-automation/
+│   ├── My workflow.json
+│   ├── README.MD
+│   └── screenshots/
+│       ├── form.png
+│       ├── sheets.png
+│       └── workflow.png
+└── client-onboarding-automation/
+    ├── webhook.json
     ├── README.MD
     └── screenshots/
-        ├── form.png
         ├── sheets.png
         └── workflow.png
 ```
@@ -86,6 +108,7 @@ n8n-workflows/
 - Gmail OAuth2 credentials
 - Google account access
 - Google Sheets credentials for the lead workflow
+- Google Sheets webhook or Apps Script automation for the client onboarding workflow
 - Apify credentials for the job market workflow
 - Google Gemini credentials for the AI email workflow
 
@@ -101,7 +124,7 @@ n8n-workflows/
 ## Notes
 
 - Workflow credentials are not included and must be configured in your own n8n instance.
-- Gmail labels, Google Sheet IDs, email recipients, Apify actor settings, and model credentials are account-specific.
+- Gmail labels, Google Sheet IDs, webhook URLs, email recipients, Apify actor settings, and model credentials are account-specific.
 - Review all email templates, AI prompts, scraper inputs, and automation rules before activating.
 
 ## Author

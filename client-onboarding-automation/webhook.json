@@ -1,0 +1,343 @@
+{
+  "name": "webhook",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "aaac418c-8576-45da-a851-525fdc2845cd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        16
+      ],
+      "id": "c400dc84-78a2-432b-8b2e-8144917d7957",
+      "name": "Webhook",
+      "webhookId": "aaac418c-8576-45da-a851-525fdc2845cd"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.range.columnStart }}",
+                    "rightValue": 8,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "669c107c-3aa3-44e4-993f-5453dc63bf2c"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a88f2e73-2a0f-4ed4-96b9-fdfaff5d3440",
+                    "leftValue": "={{ $json.body.range.columnStart }}",
+                    "rightValue": 9,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        16
+      ],
+      "id": "57b367a9-e755-49ad-be6f-1fba3980a489",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6e4b3429-db4b-4ef5-8018-21a4637ab3be",
+              "leftValue": "={{ $('Webhook').item.json.body.value }}",
+              "rightValue": "TRUE",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        -96
+      ],
+      "id": "c9af7889-990d-4a8c-aec5-cd0a1da99cc2",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.rowValues[0]['1'] }}",
+        "subject": "Meeting Link",
+        "emailType": "text",
+        "message": "=Hey,{{ $('Webhook').item.json.body.rowValues[0]['0'] }}\nhere is the meeting link",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        -160
+      ],
+      "id": "2f682772-5a5a-4d67-b68f-220ded525e8d",
+      "name": "Send a message",
+      "webhookId": "67a1694c-679d-46d8-ab26-c9eb48a8f2e0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9F5ql4TjsMZWe5BY",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.value }}",
+                    "rightValue": "=Sales Call",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "7d7328c2-e1c0-44ed-ae68-78cacde19389"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "9bd6306d-a6db-4247-92ae-6a0aa6b90bb3",
+                    "leftValue": "={{ $json.body.value }}",
+                    "rightValue": "OnBoarding",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f65b7fc3-fc3d-4813-851c-8691ba642010",
+                    "leftValue": "={{ $json.body.value }}",
+                    "rightValue": "New Lead",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        96
+      ],
+      "id": "2a700c22-094a-43b9-b052-574c7f3a4896",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.rowValues[0]['1'] }}",
+        "subject": "Onboarding form",
+        "emailType": "text",
+        "message": "=Hey,{{ $('Webhook').item.json.body.rowValues[0]['0'] }}\nPlease fill out this form , we will get to know your business better",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        944,
+        80
+      ],
+      "id": "d97c2e92-4613-49ca-8274-8b755bab1be2",
+      "name": "Send a message1",
+      "webhookId": "67a1694c-679d-46d8-ab26-c9eb48a8f2e0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9F5ql4TjsMZWe5BY",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.rowValues[0]['1'] }}",
+        "subject": "Welcome email",
+        "message": "=Hey,{{ $('Webhook').item.json.body.rowValues[0]['0'] }} Welcome ,we are pleased to work with you . You will be receiving an onboarding email and a contract",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        288
+      ],
+      "id": "5c66029a-4260-4a11-ae08-362e2a498baa",
+      "name": "Send a message2",
+      "webhookId": "b1269050-92ae-485f-8da4-323597856650",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "9F5ql4TjsMZWe5BY",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2cfc5145-13cc-49f4-a7e1-f36b9f032ef9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ff4afdbaf599070e257ecdcec07d08211437a7878376de2fdb217a2232c11998"
+  },
+  "id": "ClNo7FTg4fvuGl3m",
+  "tags": []
+}
