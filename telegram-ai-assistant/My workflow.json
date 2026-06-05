@@ -1,0 +1,633 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d4e2650f-ae66-43f4-967e-304f7a6bf302",
+      "name": "Telegram Trigger",
+      "webhookId": "65b62686-9af2-481a-8bf1-805d11783694",
+      "credentials": {
+        "telegramApi": {
+          "id": "AtXbGYOrCAbJByGo",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.document.mime_type }}",
+                    "rightValue": "application/pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "b8f0e4b1-38e0-4b2b-94bd-57b03f26052a"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "01d7674a-f4e2-4a30-a505-9321d81fe781",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.document.mime_type }}",
+                    "rightValue": "image/jpeg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "12fa5a96-33ac-4401-b6e7-f9807b534d7c",
+      "name": "Switch",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.document.thumbnail.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4d576006-36f0-466a-bcc9-fb52f9a88aff",
+      "name": "Get a file",
+      "webhookId": "c7d66965-a9e9-4c69-ad0d-d042629394b1",
+      "credentials": {
+        "telegramApi": {
+          "id": "AtXbGYOrCAbJByGo",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3-flash-preview",
+          "mode": "list",
+          "cachedResultName": "models/gemini-3-flash-preview"
+        },
+        "text": "Can you extract the data from this image?",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        -128
+      ],
+      "id": "96ad5c7d-3be7-4a59-816b-bc066b138de9",
+      "name": "Analyze an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "cO9jpXmKt7LCx9Wi",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-3-flash-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Please Extract the line items from this image reciept in json format with a list , where each row in image is there and there can be mulltiple rows.\nalso the colums shoukd have amount , quantity,,description",
+              "role": "model"
+            },
+            {
+              "role": "={{ $json.content.parts[0].text }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        -128
+      ],
+      "id": "dcf6c8ba-d5fa-47a8-a7b7-0b386e42be86",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "cO9jpXmKt7LCx9Wi",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -384,
+        656
+      ],
+      "id": "faf7fc93-913f-4991-9b29-9aa82052018a",
+      "name": "Telegram Trigger1",
+      "webhookId": "65b62686-9af2-481a-8bf1-805d11783694",
+      "credentials": {
+        "telegramApi": {
+          "id": "AtXbGYOrCAbJByGo",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "669685f3-2732-4be7-8957-e88975983346",
+              "leftValue": "={{ $json.message.voice.file_id }}",
+              "rightValue": "=",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        16,
+        608
+      ],
+      "id": "e67273d6-7c36-4210-af14-737081948ade",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        352,
+        592
+      ],
+      "id": "00ef5847-3276-4c0b-bc41-4b9294e191c5",
+      "name": "Get a file1",
+      "webhookId": "ee61c552-74ee-4390-8399-dfeb0705e7eb",
+      "credentials": {
+        "telegramApi": {
+          "id": "AtXbGYOrCAbJByGo",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        560,
+        592
+      ],
+      "id": "c70f96c3-b832-4352-b54d-2aec2e23cb0a",
+      "name": "Transcribe a recording",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "cO9jpXmKt7LCx9Wi",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        928,
+        608
+      ],
+      "id": "374d3a93-86db-4d25-afea-228e353aed7a",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3a25947e-a23d-41f1-aa0e-0719595a33cf",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        864
+      ],
+      "id": "e013a0dc-f092-44b3-bf49-35b48cc8b7e8",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1136,
+        608
+      ],
+      "id": "961fb54c-12cc-46a7-b9f0-362995458d0f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger1').item.json.message.chat.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        1184,
+        832
+      ],
+      "id": "7cae4cb4-0070-454d-b1f8-c6647125c2f3",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        1088,
+        816
+      ],
+      "id": "15221716-ec89-431a-8419-f7750331b438",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "DMhEbCWkBr3JQ3Xx",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1488,
+        608
+      ],
+      "id": "00de6c3e-4565-42bd-bd0a-2c19668c1283",
+      "name": "Send a text message",
+      "webhookId": "eb1d1cc4-8b57-4857-b3d4-537e15b186be",
+      "credentials": {
+        "telegramApi": {
+          "id": "AtXbGYOrCAbJByGo",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 345753087,
+          "message": {
+            "message_id": 5,
+            "from": {
+              "id": 987973294,
+              "is_bot": false,
+              "first_name": "..................",
+              "username": "viveksuyal10",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 987973294,
+              "first_name": "..................",
+              "username": "viveksuyal10",
+              "type": "private"
+            },
+            "date": 1780161057,
+            "document": {
+              "file_name": "7747.pdf",
+              "mime_type": "application/pdf",
+              "thumbnail": {
+                "file_id": "AAMCBQADGQEAAwVqGxohTb_19nfCEltuwVQzVxlKUAACSRwAAp422VRNoRHBPPSDvgEAB20AAzsE",
+                "file_unique_id": "AQADSRwAAp422VRy",
+                "file_size": 15958,
+                "width": 226,
+                "height": 320
+              },
+              "thumb": {
+                "file_id": "AAMCBQADGQEAAwVqGxohTb_19nfCEltuwVQzVxlKUAACSRwAAp422VRNoRHBPPSDvgEAB20AAzsE",
+                "file_unique_id": "AQADSRwAAp422VRy",
+                "file_size": 15958,
+                "width": 226,
+                "height": 320
+              },
+              "file_id": "BQACAgUAAxkBAAMFahsaIU2_9fZ3whJbbsFUM1cZSlAAAkkcAAKeNtlUTaERwTz0g747BA",
+              "file_unique_id": "AgADSRwAAp422VQ",
+              "file_size": 31807
+            },
+            "caption": "Please Process this pdf invoice"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Analyze an image": [
+      {
+        "json": {
+          "content": {
+            "parts": [
+              {
+                "text": "Based on the image provided, here is the extracted data from the invoice:\n\n### **Seller Information**\n*   **Name:** Prolife Glasses Pvt. Ltd.\n*   **Address:** K-11-12, Malviya Industrial Area, Malviya Nagar, Jaipur, Rajasthan - 302017\n*   **Email:** prolifeglasses@gmail.com\n*   **GSTIN:** 08AAHCP4413G1ZE\n\n### **Buyer Information**\n*   **Name:** MS SINDHWANI BUILDCON PVT LTD\n*   **Address:** NO 3 CAPRIC 2ND FLR 2, NEELKANTH PLOT 11 SAIDANI NAGAR, KONDHWA BK, Pune - 411048, Maharashtra\n*   **GSTIN:** 27AAICS5855A1Z5\n\n### **Invoice Details**\n*   **Invoice Number:** PGPL/R/21-22/0252\n*   **Invoice Date:** 11-01-2022\n*   **Challan Number:** 0000000000000244\n*   **P.O. Number:** MSBPPL/S-001\n*   **Vehicle Number:** RJ-14-GH-1258\n*   **Place of Supply:** MAHARASHTRA\n\n### **Item Details**\n*   **Description:** 10MM TOUGHENED CLEAR GLASS (Various sizes)\n*   **Quantity:** 15.0000 SQM\n*   **Rate:** ₹1,439.0393 per SQM\n*   **Taxable Value:** ₹21,585.59\n\n### **Tax & Totals**\n*   **IGST (18%):** ₹3,885.41\n*   **Total Taxable Amount:** ₹21,585.59\n*   **Grand Total:** **₹25,471.00**\n*   **Amount in Words:** Twenty Five Thousand Four Hundred Seventy One only.\n\n### **Bank Details**\n*   **Bank Name:** ICICI Bank\n*   **Branch:** Malviya Nagar, Jaipur\n*   **Account Name:** Prolife Glasses Pvt. Ltd.\n*   **Account Number:** 161805001252\n*   **IFSC Code:** ICIC0001618",
+                "thoughtSignature": "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"
+              }
+            ],
+            "role": "model"
+          },
+          "finishReason": "STOP",
+          "index": 0
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Analyze an image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Analyze an image": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Get a file1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file1": {
+      "main": [
+        [
+          {
+            "node": "Transcribe a recording",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe a recording": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "50c245ee-5d72-46a5-a3e4-51d924faf784",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ff4afdbaf599070e257ecdcec07d08211437a7878376de2fdb217a2232c11998"
+  },
+  "id": "gECalM9OH7KoInTm",
+  "tags": []
+}

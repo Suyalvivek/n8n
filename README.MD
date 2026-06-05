@@ -1,6 +1,6 @@
 # n8n Workflow Automation Projects
 
-A collection of practical n8n automation workflows for email management, lead capture, client onboarding, CRM updates, job market research, and AI-assisted productivity.
+A collection of practical n8n automation workflows for email management, lead capture, client onboarding, CRM updates, job market research, Telegram assistants, and AI-assisted productivity.
 
 ## Projects
 
@@ -69,6 +69,23 @@ A webhook-based client onboarding workflow that listens for Google Sheets update
 
 **Workflow file:** `client-onboarding-automation/webhook.json`
 
+### Telegram AI Assistant
+
+A Telegram-based AI assistant workflow that handles text messages, voice notes, and receipt/PDF thumbnail extraction using Google Gemini, Groq, and n8n LangChain memory.
+
+**Folder:** [telegram-ai-assistant](telegram-ai-assistant/)
+
+**Highlights:**
+
+- Telegram bot trigger for incoming messages
+- Text and voice-note assistant responses
+- Gemini voice transcription
+- Groq-powered AI Agent responses with chat memory
+- Gemini PDF thumbnail analysis for receipt line-item extraction
+- Telegram replies sent back to the original chat
+
+**Workflow file:** `telegram-ai-assistant/My workflow.json`
+
 ## Repository Structure
 
 ```text
@@ -86,6 +103,11 @@ n8n-workflows/
 │   ├── README.MD
 │   └── screenshots/
 │       ├── jobs-sheet.png
+│       └── workflow.png
+├── telegram-ai-assistant/
+│   ├── My workflow.json
+│   ├── README.MD
+│   └── screenshots/
 │       └── workflow.png
 ├── lead-management-automation/
 │   ├── My workflow.json
@@ -111,6 +133,8 @@ n8n-workflows/
 - Google Sheets webhook or Apps Script automation for the client onboarding workflow
 - Apify credentials for the job market workflow
 - Google Gemini credentials for the AI email workflow
+- Telegram Bot API credentials for the Telegram assistant workflow
+- Google Gemini and Groq credentials for the Telegram assistant workflow
 
 ## How To Use
 
@@ -124,8 +148,8 @@ n8n-workflows/
 ## Notes
 
 - Workflow credentials are not included and must be configured in your own n8n instance.
-- Gmail labels, Google Sheet IDs, webhook URLs, email recipients, Apify actor settings, and model credentials are account-specific.
-- Review all email templates, AI prompts, scraper inputs, and automation rules before activating.
+- Gmail labels, Google Sheet IDs, webhook URLs, email recipients, Telegram bots, Apify actor settings, and model credentials are account-specific.
+- Review all email templates, AI prompts, scraper inputs, assistant behavior, and automation rules before activating.
 
 ## Author
 
